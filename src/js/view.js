@@ -12,7 +12,7 @@ export const getArtGrid = (src, id) => {
 
 export const getArtdetails = (data) => {
   return `  <div class="artIndividualPhoto">
-  <img src=${data.urls.small} alt="artPhoto" />
+  <img src=${data.urls?.small} alt="artPhoto" />
 </div>
 <div class="artIndividualDetails">
   <div class="artData">
@@ -25,6 +25,11 @@ export const getArtdetails = (data) => {
         <p>Downloads</p>
         <p>${data.downloads}</p>
       </div>
+
+      <div>
+      <p>Artist</p>
+      <p>${data.user.first_name} ${data.user.last_name} </p>
+    </div>
      
     </div>
     <div class="likes">
@@ -38,9 +43,9 @@ export const getArtdetails = (data) => {
   </div>
 
   <div class="tags">
-    <p>${data.tags[0].title}</p>
-    <p>${data.tags[1].title}</p>
-    <p>${data.tags[2].title}</p>
+    <p>${data.tags[0]?.title}</p>
+    <p>${data.tags[1]?.title}</p>
+    <p>${data.tags[2]?.title}</p>
   </div>
 </div>`;
 };

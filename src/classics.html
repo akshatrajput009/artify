@@ -47,6 +47,7 @@
     </div>
 
     <div class="renderArt">
+      <h1 style="padding: 0 20px">Classic Art</h1>
       <div class="container"></div>
     </div>
     <script type="module" src="js/index.js"></script>
@@ -65,7 +66,7 @@
           query: "Classic Art",
           page: 1,
           perPage: 30,
-          orientation: "portrait",
+          orientation: "landscape",
         })
         .then((result) => {
           if (result.type === "success") {

@@ -50,6 +50,7 @@
     </div>
 
     <div class="renderArt">
+      <h1 style="padding: 0 20px">Sculptures</h1>
       <div class="container"></div>
     </div>
     <script type="module" src="js/index.js"></script>
@@ -68,7 +69,7 @@
           query: "Sculpture Art",
           page: 1,
           perPage: 30,
-          orientation: "portrait",
+          orientation: "landscape",
         })
         .then((result) => {
           if (result.type === "success") {

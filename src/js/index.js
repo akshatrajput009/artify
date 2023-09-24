@@ -2,7 +2,7 @@ import { createApi } from "unsplash-js";
 import { getCollage } from "./view";
 
 const collageGridDiv = document.querySelector(".collageGrid");
-const navBar = document.querySelector("nav");
+
 const unsplash = createApi({
   accessKey: "pILwZlK8GtqoKDrscvhRp815FJ-JUpTRUDng7izdQ_w",
 });
@@ -30,20 +30,6 @@ unsplash.search
     }
   })
   .catch((err) => {});
-
-function handleScroll() {
-  const scrollPosition = window.scrollY;
-
-  const scrollThreshold = 200;
-
-  if (scrollPosition > scrollThreshold) {
-    navBar.style.backgroundColor = "black";
-  } else {
-    navBar.style.background = "transparent";
-  }
-}
-
-window.addEventListener("scroll", handleScroll);
 
 let toggle = false;
 document.querySelector(".nav-btn").addEventListener("click", function () {

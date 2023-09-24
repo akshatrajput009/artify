@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+    />
     <script
       src="https://kit.fontawesome.com/0b6cee3c81.js"
       crossorigin="anonymous"
@@ -43,6 +47,9 @@
       <div class="galleryHome">
         <div style="height: 100vh; margin-top: 0">
           <img src="./images/gallery home.jpg" alt="museum" />
+          <div class="text-overlay">
+            <h1 class="italic-text">Artify Gallery</h1>
+          </div>
         </div>
       </div>
     </div>
@@ -58,18 +65,39 @@
         <div>
           <h1>About Us</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque
-            facere consectetur sed, doloribus quisquam vero voluptatum ipsa sint
-            est error esse vel. Inventore velit voluptatem vel, in neque magni
-            eum.
+            Artify is a website that conveys the idea of aesthetic expression
+            and knowledge. It provides a vast showcase of art and talented
+            artists, serving as a platform for the exploration and appreciation
+            of diverse artistic creations.
           </p>
+          <p>- Artistic Inspiration Galore</p>
+          <p>- Discover Talented Artists</p>
+          <p>- Diverse Artistic Showcase</p>
+          <p>- Foster Creative Exploration</p>
         </div>
       </div>
     </div>
 
     <div class="collage">
+      <h1 style="padding: 0 20px">Art In Focus</h1>
       <div class="collageGrid"></div>
     </div>
+    <script>
+      const navBar = document.querySelector("nav");
+      function handleScroll() {
+        const scrollPosition = window.scrollY;
+
+        const scrollThreshold = 200;
+
+        if (scrollPosition > scrollThreshold) {
+          navBar.style.backgroundColor = "black";
+        } else {
+          navBar.style.background = "transparent";
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll);
+    </script>
     <script type="module" src="js/index.js"></script>
   </body>
 </html>
