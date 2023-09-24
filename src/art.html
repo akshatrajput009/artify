@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      src="https://kit.fontawesome.com/0b6cee3c81.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Artify - Aesthetics, Expression, Knowledge</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body style="background-color: #222222">
+    <div>
+      <nav style="background-color: black">
+        <div class="logo">
+          <img src="./images/siteLogo.jpg" alt="logo" />
+          <a class="title" href="/">Artify</a>
+          <button class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li class="active">
+            <a href="./modernArt.html">Modern Art</a>
+          </li>
+          <li>
+            <a href="./classics.html">Classics</a>
+          </li>
+          <li>
+            <a href="./sculptures.html">Sculptures</a>
+          </li>
+          <li>
+            <a href="./favourites.html">Favourites</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="artIndividual"></div>
+    </div>
+    <script type="module" src="js/index.js"></script>
+    <script type="module">
+      import { getArtdetails } from "./js/view";
+      import state from "./js/state";
+      import { addtoStorage, getFromStorage } from "./js/storage";
+      const artIndividualDiv = document.querySelector(".artIndividual");
+      const artImage = document.querySelector(".artIndividual");
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+
+      fetch(
+        `https://api.unsplash.com/photos/${id}?client_id=pILwZlK8GtqoKDrscvhRp815FJ-JUpTRUDng7izdQ_w`
+      )
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200) {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          console.log(data);
+          if (state.favouriteArr.indexOf(data.urls.small) === -1) {
+            state.displayRedHeart = false;
+          } else {
+            state.displayRedHeart = true;
+          }
+          artIndividualDiv.innerHTML = getArtdetails(data);
+
+          artImage.addEventListener("click", (e) => {
+            if (e.target.classList[1] === "fa-heart") {
+              if (!state.displayRedHeart) {
+                state.displayRedHeart = true;
+                state.favouriteArr = data.urls.small;
+                let favouriteArr = state.favouriteArr;
+                addtoStorage({ favouriteArr });
+
+                return (artIndividualDiv.innerHTML = getArtdetails(data));
+              } else {
+                state.displayRedHeart = false;
+                state.removeItem = data.urls.small;
+
+                let favouriteArr = state.favouriteArr;
+                addtoStorage({ favouriteArr });
+                return (artIndividualDiv.innerHTML = getArtdetails(data));
+              }
+            }
+          });
+        });
+    </script>
+    <script
+      src="https://kit.fontawesome.com/0b6cee3c81.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

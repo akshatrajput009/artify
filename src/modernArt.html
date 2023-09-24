@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/0b6cee3c81.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Artify - Aesthetics, Expression, Knowledge</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div>
+      <nav style="background-color: black">
+        <div class="logo">
+          <img src="./images/siteLogo.jpg" alt="logo" />
+          <a class="title" href="/">Artify</a>
+          <button class="nav-btn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li class="active">
+            <a href="./modernArt.html">Modern Art</a>
+          </li>
+          <li>
+            <a href="./classics.html">Classics</a>
+          </li>
+          <li>
+            <a href="./sculptures.html">Sculptures</a>
+          </li>
+          <li>
+            <a href="./favourites.html">Favourites</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="galleryHome">
+        <div>
+          <img src="./images/maks-key.jpg" alt="museum" />
+        </div>
+      </div>
+    </div>
+
+    <div class="renderArt">
+      <div class="container">
+        <div class="item">
+          <img src="" alt="img" />
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/index.js"></script>
+    <script type="module">
+      import { createApi } from "unsplash-js";
+      import { getArtGrid } from "./js/view";
+      import state from "./js/state";
+
+      const artDiv = document.querySelector(".renderArt .container");
+      const unsplash = createApi({
+        accessKey: "pILwZlK8GtqoKDrscvhRp815FJ-JUpTRUDng7izdQ_w",
+      });
+
+      unsplash.search
+        .getPhotos({
+          query: "Modern Art",
+          page: 1,
+          perPage: 30,
+          orientation: "portrait",
+        })
+        .then((result) => {
+          if (result.type === "success") {
+            const photos = result.response.results;
+            console.log(photos);
+            let getUrl = photos.map((e) => {
+              return getArtGrid(e.urls.small, e.id);
+            });
+
+            artDiv.innerHTML = getUrl.join("");
+          }
+        })
+        .catch((err) => {});
+
+      artDiv.addEventListener("click", (e) => {
+        if (e.target.tagName === "IMG") {
+          console.log(e.target.id);
+          state.id = e.target.id;
+          window.location.href = `./art.html?id=${e.target.id}`;
+        }
+      });
+    </script>
+  </body>
+</html>
